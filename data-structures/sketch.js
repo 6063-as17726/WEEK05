@@ -1,27 +1,32 @@
-let xPos = 0;
-let yPos = 150;
+let xPos = []; 
+let yPos = [];
+let xVel = [];
+let cDiam = [];
 
-let xVel = 2;
-
-let cDiam = 40;
+let numCircles = 25; 
 
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(windowWidth, windowHeight);
+  for( let i = 0; i<numCircles; i++){
+  xPos.push(0);
+  yPos.push(random(30, height-30)); 
+  xVel.push(random(2,5)); 
+  cDiam.push(random(20,70)); 
+  }
 }
 
 function draw() {
   background("lightblue");
   fill(220, 10, 100);
-
+  for(let i =0; i<numCircles; i+=1) {
   // draw circle
-  ellipse(xPos, yPos, cDiam, cDiam);
-
+  ellipse(xPos[i], yPos[i], cDiam[i], cDiam[i]);
   // update pos
-  xPos = xPos + xVel;
-
+  xPos[i] = xPos[i] + xVel[i];
   // if reset is needed: pick random diameter and reset x
-  if (xPos > width + cDiam) {
-    cDiam = random(20, 75);
-    xPos = 0 - cDiam;
+  if (xPos[i] > width + cDiam[i]) {
+    cDiam[i] = random(20, 75);
+    xPos[i] = 0 - cDiam[i];
+  }
   }
 }
